@@ -1,0 +1,19 @@
+macOS doesn't support touch screens. Plug a touch monitor into a Mac and you can tap to click — but there's no on-screen keyboard, no touch-friendly media controls, nothing that makes touch browsing actually usable. TE Mac (Touch Enabled Mac) fills that gap, turning your Mac + touch monitor into an efficient touch browsing setup.
+
+ON-SCREEN KEYBOARD, EVERYWHERE
+• Tap any input field on any website and an iPad-style keyboard slides up from the bottom — blur the field and it slides away
+• Works with every text box: inputs, text areas, and rich editors, including React/Vue/Angular apps and strict sites like Google and YouTube
+• Three layouts: letters, numbers/symbols (?123), and extended symbols (#+=), with a return key that submits forms or inserts newlines
+• Word predictions appear above the keyboard as you type
+
+EASY MEDIA CONTROL
+• On YouTube, a floating touch-friendly control bar gives you big targets for play/pause, previous/next, ±10 seconds, volume, and seeking — no more hunting for tiny player buttons
+• Live search predictions above the keyboard make searching YouTube by touch fast
+• The control bar auto-hides when you're not using it
+
+SET AND FORGET
+• Auto-enables when a touch screen is detected — including monitors whose drivers don't advertise touch to the browser
+• One tap on the toolbar icon turns it on or off everywhere; your choice is remembered
+• No account, no tracking, no setup
+
+Built for Macs connected to touch-screen monitors — portable displays, drawing monitors, kiosk screens, or any USB/HDMI touch display.

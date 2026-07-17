@@ -1,0 +1,154 @@
+/* ============================================================
+   TE Mac — YouTube media control footer (iPadOS style)
+   Page-affecting rules only apply while TE Mac is enabled
+   (html.te-yt-on, toggled by yt-media.js).
+   ============================================================ */
+
+#te-yt-dock {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 14px;
+  z-index: 2147483645;
+  width: min(880px, calc(100vw - 28px));
+  background: rgba(28, 28, 30, 0.68);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  backdrop-filter: blur(40px) saturate(180%);
+  border: 0.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45), inset 0 0.5px 0 rgba(255, 255, 255, 0.12);
+  padding: 12px 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  color: rgba(255, 255, 255, 0.92);
+  transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.25s ease;
+}
+#te-yt-dock.te-yt-dock-off { display: none; }
+#te-yt-dock.te-yt-dock-hidden,
+#te-yt-dock.te-yt-dock-auto-hidden {
+  transform: translate(-50%, 140%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.te-yt-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#te-yt-dock.te-yt-no-video .te-yt-progress,
+#te-yt-dock.te-yt-no-video .te-yt-group {
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.te-yt-time {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  min-width: 48px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.2px;
+}
+
+.te-yt-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.te-yt-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.te-yt-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+  touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.te-yt-btn:hover { background: rgba(255, 255, 255, 0.10); }
+.te-yt-btn:active {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(0.92);
+}
+.te-yt-btn-sm { width: 44px; height: 44px; }
+
+.te-yt-play {
+  width: 62px;
+  height: 62px;
+  background: rgba(255, 255, 255, 0.12);
+}
+.te-yt-play:hover { background: rgba(255, 255, 255, 0.18); }
+.te-yt-play:active { background: rgba(255, 255, 255, 0.3); }
+
+/* iOS-style sliders */
+#te-yt-seekbar, #te-yt-volume {
+  -webkit-appearance: none;
+  appearance: none;
+  --fill: 0%;
+  height: 34px;
+  background: transparent;
+  cursor: pointer;
+  touch-action: none;
+  margin: 0;
+}
+#te-yt-seekbar { flex: 1; }
+#te-yt-volume { width: 130px; }
+
+#te-yt-seekbar::-webkit-slider-runnable-track,
+#te-yt-volume::-webkit-slider-runnable-track {
+  height: 5px;
+  border-radius: 2.5px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.95) var(--fill),
+    rgba(255, 255, 255, 0.22) var(--fill)
+  );
+}
+#te-yt-seekbar::-webkit-slider-thumb,
+#te-yt-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  margin-top: -8.5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Page adjustments, only while enabled ===== */
+html.te-yt-on ytd-app { padding-bottom: 160px; }
+
+/* Hide YouTube's own player controls — the dock replaces them */
+html.te-yt-on .ytp-chrome-bottom,
+html.te-yt-on .ytp-gradient-bottom {
+  display: none !important;
+}
+
+/* Touch-friendlier search box */
+html.te-yt-on ytd-searchbox #container.ytd-searchbox,
+html.te-yt-on ytd-searchbox input#search {
+  font-size: 18px !important;
+  min-height: 46px !important;
+}
