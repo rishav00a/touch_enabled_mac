@@ -4,3 +4,4 @@ touch_enabled_mac_macos_app/build/
 touch_enabled_mac_macos_app/dist/
 touch_enabled_mac_chrome_extension/dist/
 node_modules/
+touch_enabled_mac_chrome_extension/store-assets/PUBLISHING.md
