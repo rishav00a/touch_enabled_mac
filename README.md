@@ -47,8 +47,9 @@ two-finger gestures.
 | [`touch_enabled_mac_macos_app/`](touch_enabled_mac_macos_app/) | Native macOS app (Swift): two-finger swipe scrolling + system-wide on-screen keyboard that works in every application. Ships as DMG/PKG. |
 | [`touch_enabled_mac_chrome_extension/`](touch_enabled_mac_chrome_extension/) | Chrome extension (Manifest V3): touch media controls on YouTube + iPadOS-style on-screen keyboard for any input field on any site. |
 
-Use the Chrome extension if you mostly browse; use the macOS app for smooth
-scrolling and the keyboard everywhere on the system.
+Each works on its own, but **install both for the best experience** — smooth,
+consistent touch across every native Mac app *and* everything you do in the
+browser.
 
 ## Features
 
@@ -79,8 +80,27 @@ scrolling and the keyboard everywhere on the system.
 
 ## Screenshots
 
-<!-- Add screenshots to the screenshots/ folder and reference them here. -->
-_Screenshots coming soon — see [`screenshots/`](screenshots/)._
+### macOS app — touch everywhere on the system
+
+| iPad-style keyboard in any app | Menu-bar touch mode |
+| --- | --- |
+| <img src="screenshots/mac_os_app/osk.jpg" alt="On-screen keyboard sliding in over Finder when the search field is focused"> | <img src="screenshots/mac_os_app/enable_plugin.jpg" alt="Menu-bar menu with Touch Mode toggle, Launch OSK shortcut, and per-monitor switches"> |
+
+Focus any input box — here Finder's search field — and the keyboard slides in
+on that monitor. The menu-bar icon gives you the master **Touch Mode** switch,
+**⌥⌘K** to launch the keyboard on demand, and a per-monitor toggle for every
+connected display.
+
+### Chrome extension — touch-friendly browsing
+
+<img src="screenshots/chrome_extension/media_control_paused.png" alt="Floating touch media control bar on a YouTube video: seek bar, play/pause, prev/next, ±10s, volume, fullscreen">
+
+Big touch targets for YouTube: seek bar, play/pause, previous/next, ±10 s
+jumps, volume, and fullscreen — no more hunting for tiny hover controls.
+
+| Live search predictions on YouTube | Keyboard on any site's forms |
+| --- | --- |
+| <img src="screenshots/chrome_extension/yt_Search.png" alt="On-screen keyboard on YouTube with live search predictions above the keys"> | <img src="screenshots/chrome_extension/form_input.png" alt="On-screen keyboard typing into a regular web form"> |
 
 ## Building from source
 
