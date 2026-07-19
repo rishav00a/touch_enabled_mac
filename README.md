@@ -83,7 +83,7 @@ browser.
 ### macOS app — touch everywhere on the system
 
 <p>
-  <img src="screenshots/mac_os_app/enable_plugin.jpg" width="49%" alt="One switch in the menu bar — Touch Mode toggle, ⌥⌘K launch shortcut, per-monitor switches">
+  <img src="screenshots/mac_os_app/menu_bar_touch_mode.jpg" width="49%" alt="One switch in the menu bar — Touch Mode toggle, ⌥⌘K launch shortcut, per-monitor switches">
   <img src="screenshots/mac_os_app/osk.jpg" width="49%" alt="Type anywhere — the on-screen keyboard slides in over Finder when an input is focused">
 </p>
 
