@@ -82,25 +82,19 @@ browser.
 
 ### macOS app — touch everywhere on the system
 
-| iPad-style keyboard in any app | Menu-bar touch mode |
-| --- | --- |
-| <img src="screenshots/mac_os_app/osk.jpg" alt="On-screen keyboard sliding in over Finder when the search field is focused"> | <img src="screenshots/mac_os_app/enable_plugin.jpg" alt="Menu-bar menu with Touch Mode toggle, Launch OSK shortcut, and per-monitor switches"> |
-
-Focus any input box — here Finder's search field — and the keyboard slides in
-on that monitor. The menu-bar icon gives you the master **Touch Mode** switch,
-**⌥⌘K** to launch the keyboard on demand, and a per-monitor toggle for every
-connected display.
+<p>
+  <img src="screenshots/mac_os_app/osk.jpg" width="49%" alt="Type anywhere — the on-screen keyboard slides in over Finder when an input is focused">
+  <img src="screenshots/mac_os_app/enable_plugin.jpg" width="49%" alt="One switch in the menu bar — Touch Mode toggle, ⌥⌘K launch shortcut, per-monitor switches">
+</p>
 
 ### Chrome extension — touch-friendly browsing
 
-<img src="screenshots/chrome_extension/media_control_paused.png" alt="Floating touch media control bar on a YouTube video: seek bar, play/pause, prev/next, ±10s, volume, fullscreen">
+<img src="screenshots/chrome_extension/media_control.jpg" alt="Touch-first YouTube — floating media bar with seek, play/pause, ±10 s, volume and fullscreen, sized for fingers">
 
-Big touch targets for YouTube: seek bar, play/pause, previous/next, ±10 s
-jumps, volume, and fullscreen — no more hunting for tiny hover controls.
-
-| Live search predictions on YouTube | Keyboard on any site's forms |
-| --- | --- |
-| <img src="screenshots/chrome_extension/yt_Search.png" alt="On-screen keyboard on YouTube with live search predictions above the keys"> | <img src="screenshots/chrome_extension/form_input.png" alt="On-screen keyboard typing into a regular web form"> |
+<p>
+  <img src="screenshots/chrome_extension/yt_search.jpg" width="49%" alt="Live search predictions above the keyboard while typing in YouTube search">
+  <img src="screenshots/chrome_extension/form_input.jpg" width="49%" alt="Works on every site — the keyboard typing into a regular web form">
+</p>
 
 ## Building from source
 
