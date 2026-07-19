@@ -119,8 +119,7 @@ browser is the text you're currently typing, sent to two suggestion APIs
 
 If Touch Enabled Mac makes your touch-screen Mac nicer to use, you can
 
-<a href="https://buymeacoffee.com/rishav00a"><img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-☕-FFDD00?style=for-the-badge" alt="Buy me a coffee"></a>
-
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q3Q223I16Z)
 ## License
 
 MIT © [rishav00a](https://github.com/rishav00a)
