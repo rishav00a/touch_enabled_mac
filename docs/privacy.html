@@ -6,11 +6,17 @@
 <title>Privacy Policy — Touch Enabled Mac</title>
 <meta name="description" content="Touch Enabled Mac does not collect, store, sell, or share any personal data. No accounts, no analytics, no tracking.">
 <link rel="icon" href="assets/icon.png">
+<script>(function(){document.documentElement.setAttribute("data-theme",localStorage.getItem("theme")||"light");})();</script>
 <style>
   :root{
+    --bg:#f6f7fb; --panel:#ffffff; --line:rgba(15,23,42,.10);
+    --text:#101828; --muted:#5b6579; --accent:#4f5ff0;
+  }
+  [data-theme="dark"]{
     --bg:#0b0d14; --panel:#12151f; --line:rgba(255,255,255,.08);
     --text:#e8eaf2; --muted:#9aa1b5; --accent:#7c8cf8;
   }
+  body,.card,code{transition:background-color .2s ease,border-color .2s ease,color .2s ease}
   *{margin:0;padding:0;box-sizing:border-box}
   body{
     background:var(--bg); color:var(--text);
@@ -26,6 +32,17 @@
   nav .name span{color:var(--muted);font-weight:400}
   nav .back{margin-left:auto;font-size:14px;color:var(--muted)}
   nav .back:hover{color:var(--text)}
+  .themeswitch{
+    position:relative;width:66px;height:32px;border-radius:99px;
+    border:1px solid var(--line);background:var(--panel);cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:space-between;
+    padding:0 7px;font-size:13px;line-height:1;margin-left:14px;
+  }
+  .themeswitch .knob{
+    position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;
+    background:linear-gradient(135deg,#4f5ff0,#8b5cf6);transition:transform .22s ease;
+  }
+  [data-theme="dark"] .themeswitch .knob{transform:translateX(34px)}
   h1{font-size:clamp(28px,5vw,40px);letter-spacing:-.02em;margin:44px 0 6px}
   .date{color:var(--muted);font-size:14px;margin-bottom:36px}
   h2{font-size:20px;letter-spacing:-.01em;margin:38px 0 12px}
@@ -49,6 +66,9 @@
     <img src="assets/icon.png" alt="">
     <div class="name">TE&nbsp;Mac <span>· Touch Enabled Mac</span></div>
     <a class="back" href="index.html">← Back to site</a>
+    <button class="themeswitch" id="tbtn" onclick="toggleTheme()" role="switch" aria-label="Toggle dark mode">
+      <span>☀️</span><span>🌙</span><span class="knob"></span>
+    </button>
   </nav>
 
   <h1>Privacy Policy</h1>
@@ -98,5 +118,12 @@
   <h2>Contact</h2>
   <p>Questions or concerns: <a href="mailto:rishav00a@gmail.com">rishav00a@gmail.com</a></p>
 </div>
+<script>
+function toggleTheme(){
+  var r=document.documentElement;
+  var t=r.getAttribute("data-theme")==="dark"?"light":"dark";
+  r.setAttribute("data-theme",t);localStorage.setItem("theme",t);
+}
+</script>
 </body>
 </html>
