@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Touch Enabled Mac — make your touch monitor actually work on macOS</title>
+<meta name="description" content="macOS doesn't support touch screens — this project fixes that. Two-finger scrolling, an iPad-style on-screen keyboard everywhere, and touch-friendly browsing.">
+<link rel="icon" href="assets/icon.png">
+<meta property="og:title" content="Touch Enabled Mac">
+<meta property="og:description" content="A smoother touch-screen experience for your Mac — free & open source.">
+<meta property="og:image" content="assets/osk.jpg">
+<style>
+  :root{
+    --bg:#0b0d14; --panel:#12151f; --line:rgba(255,255,255,.08);
+    --text:#e8eaf2; --muted:#9aa1b5; --accent:#7c8cf8; --accent2:#b06ef0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--text);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* nav */
+  nav{display:flex;align-items:center;gap:12px;padding:22px 0}
+  nav img{width:34px;height:34px;border-radius:8px}
+  nav .name{font-weight:700}
+  nav .name span{color:var(--muted);font-weight:400}
+  nav .links{margin-left:auto;display:flex;gap:22px;font-size:14px}
+  nav .links a{color:var(--muted)}
+  nav .links a:hover{color:var(--text);text-decoration:none}
+
+  /* hero */
+  header{padding:72px 0 40px;text-align:center}
+  .eyebrow{
+    font-size:13px;letter-spacing:.18em;font-weight:600;color:var(--muted);
+    text-transform:uppercase;margin-bottom:18px;
+  }
+  h1{font-size:clamp(34px,6vw,58px);line-height:1.12;letter-spacing:-.02em;font-weight:800}
+  h1 em{
+    font-style:normal;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  header p.lead{max-width:620px;margin:24px auto 0;color:var(--muted);font-size:18px}
+  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:34px 0 10px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:12px;
+    font-weight:600;font-size:15px;transition:transform .12s ease,box-shadow .12s ease;
+  }
+  .btn:hover{text-decoration:none;transform:translateY(-1px)}
+  .btn.primary{
+    color:#fff;background:linear-gradient(135deg,#4f5ff0,#8b5cf6);
+    box-shadow:0 8px 24px rgba(99,102,241,.35);
+  }
+  .btn.ghost{color:var(--text);border:1px solid var(--line);background:var(--panel)}
+  .btn svg{width:18px;height:18px;fill:currentColor}
+  .fineprint{font-size:13px;color:var(--muted)}
+
+  .shot{
+    border-radius:16px;border:1px solid var(--line);display:block;width:100%;
+    box-shadow:0 30px 80px rgba(0,0,0,.55);
+  }
+  .hero-shot{max-width:820px;margin:48px auto 0}
+
+  section{padding:76px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(26px,4vw,36px);letter-spacing:-.02em;margin-bottom:14px}
+  .sub{color:var(--muted);max-width:640px;margin-bottom:44px}
+
+  /* pain */
+  .pain{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .pain div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .pain .x{font-size:22px;margin-bottom:10px;display:block}
+  .pain h3{font-size:17px;margin-bottom:6px}
+  .pain p{font-size:14.5px;color:var(--muted)}
+
+  /* products */
+  .product{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .product + .product{margin-top:86px}
+  .product .tag{
+    display:inline-block;font-size:12px;letter-spacing:.14em;font-weight:700;
+    text-transform:uppercase;color:var(--accent);margin-bottom:12px;
+  }
+  .product h3{font-size:24px;margin-bottom:12px;letter-spacing:-.01em}
+  .product ul{list-style:none;margin:18px 0 26px}
+  .product li{padding-left:26px;position:relative;margin-bottom:10px;color:var(--muted);font-size:15px}
+  .product li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700}
+  .product li b{color:var(--text);font-weight:600}
+  .btn.small{padding:10px 18px;font-size:14px;border-radius:10px}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+
+  footer{border-top:1px solid var(--line);padding:44px 0 60px;text-align:center}
+  .social{display:flex;gap:14px;justify-content:center;margin:18px 0 22px}
+  .social a{
+    width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--panel);
+    display:inline-flex;align-items:center;justify-content:center;color:var(--muted);
+    transition:color .12s ease,transform .12s ease;
+  }
+  .social a:hover{color:var(--text);transform:translateY(-2px);text-decoration:none}
+  .social svg{width:20px;height:20px;fill:currentColor}
+  footer .fineprint a{color:var(--muted);text-decoration:underline}
+
+  @media (max-width:800px){
+    .pain{grid-template-columns:1fr}
+    .product{grid-template-columns:1fr;gap:26px}
+    .product.flip .media{order:-1}
+    section{padding:56px 0}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <img src="assets/icon.png" alt="">
+    <div class="name">TE&nbsp;Mac <span>· Touch Enabled Mac</span></div>
+    <div class="links">
+      <a href="#mac">macOS app</a>
+      <a href="#chrome">Chrome extension</a>
+      <a href="https://github.com/rishav00a/touch_enabled_mac">GitHub</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="eyebrow">Free &amp; open source</div>
+    <h1>Your Mac has a touch screen.<br><em>macOS pretends it doesn't.</em></h1>
+    <p class="lead">
+      Plug a touch monitor into a Mac and you can tap to click — and that's it.
+      Touch Enabled Mac fills in the rest: natural scrolling, an iPad-style
+      keyboard that appears when you need it, and controls big enough for fingers.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/rishav00a/touch_enabled_mac/releases/download/v1.0.0/Touch-Enabled-Mac-1.0.0.pkg">
+        <svg viewBox="0 0 24 24"><path d="M12 3v10.6l-3.3-3.3-1.4 1.4L12 17.4l4.7-5.7-1.4-1.4L13 13.6V3h-1zM5 19h14v2H5z"/></svg>
+        Download for macOS
+      </a>
+      <a class="btn ghost" href="https://chromewebstore.google.com/detail/te-mac-%E2%80%94-touch-enabled-ma/iggpbelenecgchleaodllbfplfjiabdo">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 8.66 5H12a5 5 0 0 0-4.9 4H7.1L3.57 6.1A10 10 0 0 1 12 2zM2.63 8.03 7.2 15.9a5 5 0 0 0 4.13 3.06L9.06 21.6A10 10 0 0 1 2.63 8.03zM21.8 9a10 10 0 0 1-9.6 12.96L16.3 14a5 5 0 0 0 .41-5h5.1zM12 9.5A2.5 2.5 0 1 1 9.5 12 2.5 2.5 0 0 1 12 9.5z"/></svg>
+        Add to Chrome
+      </a>
+    </div>
+    <div class="fineprint">macOS 13+ · Apple Silicon &amp; Intel · MIT licensed</div>
+    <img class="shot hero-shot" src="assets/osk.jpg"
+         alt="iPad-style on-screen keyboard floating over Finder on macOS">
+  </header>
+
+  <section id="pain">
+    <h2>The problem</h2>
+    <p class="sub">
+      Touch monitors work beautifully with Windows and iPads. Connect one to a
+      Mac and you hit three walls immediately:
+    </p>
+    <div class="pain">
+      <div>
+        <span class="x">🚫</span>
+        <h3>Scrolling doesn't work</h3>
+        <p>macOS only tracks a single finger, so the two-finger swipe you use
+        everywhere else does nothing. Every scroll means finding a scrollbar.</p>
+      </div>
+      <div>
+        <span class="x">⌨️</span>
+        <h3>No on-screen keyboard</h3>
+        <p>Tap a text field and… nothing. You reach back for the physical
+        keyboard, defeating the point of a touch setup.</p>
+      </div>
+      <div>
+        <span class="x">🎯</span>
+        <h3>Targets made for a mouse</h3>
+        <p>Video controls, seek bars and menus are built for a precise pointer —
+        frustrating and error-prone with a fingertip.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="solution">
+    <h2>The fix — two small tools</h2>
+    <p class="sub">
+      A native menu-bar app for the system, and a Chrome extension for the
+      browser. Each works alone; together they make touch feel first-class
+      everywhere.
+    </p>
+
+    <div class="product" id="mac">
+      <div>
+        <span class="tag">macOS app</span>
+        <h3>Touch that works in every app</h3>
+        <ul>
+          <li><b>Two-finger swipe scrolling</b> — natural-direction, horizontal
+            and vertical, on any touch monitor.</li>
+          <li><b>Keyboard on focus</b> — the iPad-style keyboard slides in when
+            you focus any input box, in any application.</li>
+          <li><b>One menu-bar switch</b> — auto-detects touch screens, with a
+            per-monitor toggle and a ⌥⌘K shortcut.</li>
+        </ul>
+        <div>
+          <a class="btn primary small" href="https://github.com/rishav00a/touch_enabled_mac/releases/download/v1.0.0/Touch-Enabled-Mac-1.0.0.pkg">Download .pkg</a>
+          &nbsp;
+          <a class="btn ghost small" href="https://github.com/rishav00a/touch_enabled_mac/releases/download/v1.0.0/Touch-Enabled-Mac-1.0.0.dmg">Download .dmg</a>
+        </div>
+      </div>
+      <div class="media">
+        <img class="shot" src="assets/menu.jpg"
+             alt="Touch Enabled Mac menu-bar menu with Touch Mode toggle and per-monitor switches">
+      </div>
+    </div>
+
+    <div class="product flip" id="chrome">
+      <div class="media">
+        <img class="shot" src="assets/media.jpg"
+             alt="Floating touch media control bar on a YouTube video">
+      </div>
+      <div>
+        <span class="tag">Chrome extension</span>
+        <h3>Touch-friendly browsing</h3>
+        <ul>
+          <li><b>Touch media controls for YouTube</b> — big play/pause,
+            prev/next, ±10 s, volume and seek targets.</li>
+          <li><b>A keyboard on every site</b> — works with any input field,
+            including React/Vue apps and strict sites like Google.</li>
+          <li><b>Live predictions</b> — word completions and YouTube search
+            suggestions as you type.</li>
+        </ul>
+        <div>
+          <a class="btn primary small" href="https://chromewebstore.google.com/detail/te-mac-%E2%80%94-touch-enabled-ma/iggpbelenecgchleaodllbfplfjiabdo">Chrome Web Store</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="duo">
+      <img class="shot" src="assets/search.jpg"
+           alt="Live YouTube search predictions above the on-screen keyboard">
+      <img class="shot" src="assets/form.jpg"
+           alt="On-screen keyboard typing into a web form">
+    </div>
+  </section>
+
+  <footer>
+    <img src="assets/icon.png" alt="" width="40" style="border-radius:10px">
+    <p style="margin-top:12px;color:var(--muted)">
+      Built by <b style="color:var(--text)">Rishav</b> — because touch screens
+      shouldn't stop working when you plug them into a Mac.
+    </p>
+    <div class="social">
+      <a href="https://github.com/rishav00a" aria-label="GitHub" title="GitHub">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.42 7.42 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/rishav00a" aria-label="LinkedIn" title="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45z"/></svg>
+      </a>
+      <a href="https://buymeacoffee.com/rishav00a" aria-label="Buy me a coffee" title="Buy me a coffee">
+        <svg viewBox="0 0 24 24"><path d="M18 8h1a3 3 0 0 1 0 6h-1.1A6 6 0 0 1 12 19a6 6 0 0 1-5.9-5H6V8h12zm0 2v2h1a1 1 0 0 0 0-2h-1zM5 21h14v-2H5v2zM8.5 2.5c.5 1-.6 1.6-.3 2.5h1.4c-.3-1 .8-1.6.4-2.5H8.5zm3.5 0c.5 1-.6 1.6-.3 2.5h1.4c-.3-1 .8-1.6.4-2.5H12z"/></svg>
+      </a>
+    </div>
+    <div class="fineprint">
+      MIT © <a href="https://github.com/rishav00a">rishav00a</a> ·
+      <a href="https://github.com/rishav00a/touch_enabled_mac">Source on GitHub</a> ·
+      <a href="https://github.com/rishav00a/touch_enabled_mac/blob/main/PRIVACY.md">Privacy</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
