@@ -119,7 +119,7 @@ browser is the text you're currently typing, sent to two suggestion APIs
 
 If Touch Enabled Mac makes your touch-screen Mac nicer to use, you can
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q3Q223I16Z)
+<a href='https://ko-fi.com/Q3Q223I16Z' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 ## License
 
 MIT © [rishav00a](https://github.com/rishav00a)
