@@ -3,34 +3,77 @@
 **macOS doesn't support touch screens — this project fixes that.**
 
 Plug a touch monitor into a Mac and you can tap to click, but that's where it
-ends: no on-screen keyboard, no touch-friendly media controls, nothing that
-makes touch browsing actually usable. Touch Enabled Mac turns a Mac + touch
-monitor into an efficient touch setup with an iPad-style on-screen keyboard
-and easy media control.
+ends: no scroll gestures, no on-screen keyboard, no touch-friendly controls.
+Touch Enabled Mac has one objective: **give your Mac a smoother touch-screen
+experience** — natural swipe scrolling, an iPad-style keyboard that appears
+when you need it, and big touch targets where they matter.
+
+It comes in two parts that work independently or together:
+
+- **macOS app** — system-wide touch support: **two-finger swipe scrolling
+  (horizontal and vertical)** on your touch monitor, and an on-screen keyboard
+  that slides in automatically **whenever you focus an input box in any Mac
+  application** — Finder, Terminal, Slack, anything.
+- **Chrome extension** — a smoother touch *browsing* experience:
+  **touch-friendly media controls on YouTube** (play/pause, prev/next, ±10 s,
+  volume, seek) and an **on-screen keyboard for any input field in the
+  browser**, on any website.
+
+## Download
+
+| Component | Get it |
+| --- | --- |
+| **macOS app** (installer package) | [Touch-Enabled-Mac-1.0.0.pkg](https://github.com/rishav00a/touch_enabled_mac/releases/download/v1.0.0/Touch-Enabled-Mac-1.0.0.pkg) |
+| **macOS app** (disk image) | [Touch-Enabled-Mac-1.0.0.dmg](https://github.com/rishav00a/touch_enabled_mac/releases/download/v1.0.0/Touch-Enabled-Mac-1.0.0.dmg) |
+| **Chrome extension** | [Chrome Web Store — TE Mac](https://chromewebstore.google.com/detail/te-mac-%E2%80%94-touch-enabled-ma/iggpbelenecgchleaodllbfplfjiabdo) (or [te-mac-chrome-extension-1.3.0.zip](https://github.com/rishav00a/touch_enabled_mac/releases/download/v1.0.0/te-mac-chrome-extension-1.3.0.zip) for manual install) |
+
+All installers are also on the [Releases page](https://github.com/rishav00a/touch_enabled_mac/releases).
+
+**macOS app:** run the `.pkg` (or open the `.dmg` and drag the app to
+Applications). The app is ad-hoc signed, so on first open right-click →
+**Open** → **Open**, then grant the **Accessibility** and **Input Monitoring**
+permissions it asks for — they're what let it watch input focus and read
+two-finger gestures.
+
+**Chrome extension:** install from the
+[Chrome Web Store](https://chromewebstore.google.com/detail/te-mac-%E2%80%94-touch-enabled-ma/iggpbelenecgchleaodllbfplfjiabdo)
+(recommended), or manually: unzip the release zip, then `chrome://extensions`
+→ Developer mode → **Load unpacked** → select the folder.
 
 ## What's in this repo
 
 | Folder | What it is |
 | --- | --- |
-| [`touch_enabled_mac_chrome_extension/`](touch_enabled_mac_chrome_extension/) | Chrome extension (Manifest V3): iPadOS-style on-screen keyboard for any input field on any site, plus touch media controls and live search predictions on YouTube. |
-| [`touch_enabled_mac_macos_app/`](touch_enabled_mac_macos_app/) | Native macOS app (Swift): system-wide on-screen touch keyboard that works in every application, not just the browser. Ships as a DMG/PKG. |
+| [`touch_enabled_mac_macos_app/`](touch_enabled_mac_macos_app/) | Native macOS app (Swift): two-finger swipe scrolling + system-wide on-screen keyboard that works in every application. Ships as DMG/PKG. |
+| [`touch_enabled_mac_chrome_extension/`](touch_enabled_mac_chrome_extension/) | Chrome extension (Manifest V3): touch media controls on YouTube + iPadOS-style on-screen keyboard for any input field on any site. |
 
-Use the Chrome extension if you mostly browse; use the macOS app if you want
-the keyboard everywhere on the system. They work independently and together.
+Use the Chrome extension if you mostly browse; use the macOS app for smooth
+scrolling and the keyboard everywhere on the system.
 
 ## Features
 
-- **iPad-style on-screen keyboard** — slides up when you focus a text field,
-  slides away when you're done. Letters, numbers/symbols (`?123`), and
-  extended symbols (`#+=`) layouts.
-- **Works on every site** — types through browser editing commands so
-  React/Vue/Angular inputs and strict sites (Google, YouTube) update
-  correctly.
-- **Touch media control** — on YouTube, a floating control bar with big touch
+### macOS app
+
+- **Two-finger swipe scrolling** — macOS only tracks a touch screen's first
+  finger; the app reads the monitor's raw touch data and turns two-finger
+  swipes into natural-direction scrolling, **both horizontal and vertical**.
+- **Keyboard on focus, in every app** — focus any input box in any macOS
+  application and the iPad-style keyboard slides in on that monitor; it slides
+  away when focus leaves, like iPadOS.
+- **Touch-screen auto-detection** — touch mode arms itself when a touch
+  monitor is detected, with per-monitor switches and a menu-bar toggle.
+- **Launch on demand** — bring the keyboard up any time with ⌥⌘K.
+
+### Chrome extension
+
+- **Touch media controls on YouTube** — a floating control bar with big touch
   targets: play/pause, previous/next, ±10 s, volume, and seeking.
+- **On-screen keyboard for any input field** — works on any website; types
+  through browser editing commands so React/Vue/Angular inputs and strict
+  sites (Google, YouTube) update correctly.
 - **Word & search predictions** — word completions above the keyboard, live
   YouTube search suggestions while typing in the search box.
-- **Touch-screen auto-detection** — enables itself when a touch screen is
+- **Auto-detection + toolbar toggle** — enables itself when a touch screen is
   detected (including monitors whose drivers don't advertise touch); one tap
   on the toolbar icon overrides it any time.
 
@@ -39,17 +82,17 @@ the keyboard everywhere on the system. They work independently and together.
 <!-- Add screenshots to the screenshots/ folder and reference them here. -->
 _Screenshots coming soon — see [`screenshots/`](screenshots/)._
 
-## Install
+## Building from source
 
-**Chrome extension** — from the Chrome Web Store (link coming after review),
-or manually: `chrome://extensions` → Developer mode → **Load unpacked** →
-select `touch_enabled_mac_chrome_extension/`.
-
-**macOS app** — build DMG + PKG installers with:
+**macOS app** — requires only the Xcode Command Line Tools:
 
 ```sh
-cd touch_enabled_mac_macos_app && ./build.sh
+cd touch_enabled_mac_macos_app && ./build.sh   # produces dist/*.dmg and dist/*.pkg
 ```
+
+**Chrome extension** — no build needed; load
+`touch_enabled_mac_chrome_extension/` unpacked, or zip it per
+[`store-assets/PUBLISHING.md`](touch_enabled_mac_chrome_extension/store-assets/PUBLISHING.md).
 
 ## Privacy
 

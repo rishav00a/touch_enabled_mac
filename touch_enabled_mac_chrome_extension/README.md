@@ -28,9 +28,15 @@ monitors.
 
 ## Install as a browser extension (Chrome / Edge / Brave / Arc)
 
+**Easiest:** install from the
+[Chrome Web Store](https://chromewebstore.google.com/detail/te-mac-%E2%80%94-touch-enabled-ma/iggpbelenecgchleaodllbfplfjiabdo).
+
+Or manually (any Chromium browser):
+
 1. Open `chrome://extensions`
 2. Enable **Developer mode** (top right)
-3. Click **Load unpacked** and select this `te_mac` folder
+3. Click **Load unpacked** and select this folder (or the unzipped
+   [release zip](https://github.com/rishav00a/touch_enabled_mac/releases))
 
 ## Load into an Electron app
 
